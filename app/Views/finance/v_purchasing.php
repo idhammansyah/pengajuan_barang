@@ -181,12 +181,19 @@
                 <p class="text-danger fw-bold">Not found the reason.</p>
               <?php }?>
             </div>
+            <hr>
+            <?php if(!empty($pr['file_upload_name'])) :?>
+            <div class="mb-3">
+              <label for="">Bukti upload</label>
+              <img src="<?= base_url()?>/upload/bukti_tf/<?= $pr['file_upload_name']?>" alt="" class="img-fluid" style="height: 200px;">
+            </div>
+            <?php endif;?>
           </div>
           <hr>
           <div class="d-flex justify-content-center">
-            <a href="<?= route_to('approved_purchase_finance', $pr['id_barang']) ?>" class="btn btn-success <?= $pr['status_approval_finance'] == "Accepted" || $pr['status_approval_finance'] == "Rejected" ? 'disabled' : ''?>">
+            <button type="button" data-bs-target="#accepted-<?= $pr['id_barang']?>" data-bs-toggle="modal" class="btn btn-success <?= $pr['status_approval_finance'] == "Accepted" || $pr['status_approval_finance'] == "Rejected" ? 'disabled' : ''?>">
               <i class="bi bi-check2-circle"></i>&nbsp; Approve
-            </a>
+            </button>
             <button class="btn btn-danger ms-3" data-bs-target="#reject-<?= $pr['id_barang']?>" data-bs-toggle="modal" <?= $pr['status_approval_finance'] == "Accepted" || $pr['status_approval_finance'] == "Rejected" ? 'disabled' : ''?>>
               <i class="bi bi-x"></i>&nbsp; Reject
             </button>
@@ -195,6 +202,30 @@
       </div>
     </div>
   </div>
+  
+  <div class="modal fade" id="accepted-<?= $pr['id_barang']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h1 class="modal-title fs-5" id="exampleModalToggleLabel2">Accepted - <b><?= $pr['nama_barang']?></b></h1>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form action="<?= route_to('approved_purchase_finance', $pr['id_barang']);?>" method="post" enctype="multipart/form-data">
+          <div class="modal-body">
+            <div class="mb-3">
+              <label class="form-label">Upload File</label>
+              <input type="file" class="form-control" name="uploads">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-bs-target="#staticBackdrop-<?= $pr['id_barang']?>" data-bs-toggle="modal">Cancel Submit</button>
+            <button class="btn btn-primary" type="submit"><i class="bi bi-send"></i>&nbsp; Submit</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  
   <div class="modal fade" id="reject-<?= $pr['id_barang']?>" aria-hidden="true" aria-labelledby="exampleModalToggleLabel2" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
@@ -217,6 +248,8 @@
       </div>
     </div>
   </div>
+  
+
 <?php endforeach;?>
 
 <?= $this->endSection();?>

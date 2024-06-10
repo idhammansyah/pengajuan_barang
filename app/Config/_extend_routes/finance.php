@@ -10,7 +10,7 @@ $routes->get('view-purchasing-data', 'Finance_Controller::v_purchasing', ['as' =
 
 $routes->post('save-purchasing', 'Finance_Controller::save_barang', ['as' => 'save_purchasing_data']);
 
-$routes->get('approved-finance-purchasing/(:any)', 'Finance_Controller::approve_barang/$1', ['as' => 'approved_purchase_finance']);
+$routes->post('approved-finance-purchasing/(:any)', 'Finance_Controller::approve_barang/$1', ['as' => 'approved_purchase_finance']);
 
 $routes->post('submit-edit-purchasing/(:any)', 'Finance_Controller::submit_changes/$1', ['as' => 'save_edit_barang']);
 

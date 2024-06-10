@@ -183,6 +183,13 @@
               <?php }?>
             </div>
           </div>
+          <hr>
+          <?php if(!empty($pr['file_upload_name'])) :?>
+            <div class="mb-3">
+              <label for="">Bukti upload</label>
+              <img src="<?= base_url()?>/upload/bukti_tf/<?= $pr['file_upload_name']?>" alt="" class="img-fluid" style="height: 200px;">
+            </div>
+            <?php endif;?>
           <div class="d-flex justify-content-center">
             <a href="<?= route_to('approved_purchase_manager', $pr['id_barang']) ?>" class="btn btn-success <?= $pr['status_approval'] == "Accepted" || $pr['status_approval'] == "Rejected" ? 'disabled' : ''?>">
               <i class="bi bi-check2-circle"></i>&nbsp; Approve

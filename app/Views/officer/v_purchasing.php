@@ -222,6 +222,13 @@
                 <p class="text-danger fw-bold">Not found the reason.</p>
               <?php }?>
             </div>
+            <hr>
+            <?php if(!empty($pr['file_upload_name'])) :?>
+            <div class="mb-3">
+              <label for="">Bukti upload</label>
+              <img src="<?= base_url()?>/upload/bukti_tf/<?= $pr['file_upload_name']?>" alt="" class="img-fluid" style="height: 200px;">
+            </div>
+            <?php endif;?>
           </div>
           <div class="d-flex justify-content-center">
             <a href="<?= route_to('edit_data_purchasings', $pr['id_barang']) ?>" class="btn btn-warning">

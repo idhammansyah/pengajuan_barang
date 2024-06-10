@@ -135,12 +135,15 @@ class Finance_Controller extends BaseController
 
   public function approve_barang($id)
   {
+    $gambar = $this->request->getFile('uploads');
+    $name_of_files = $gambar->getName();
+    $gambar->move('upload/bukti_tf', $name_of_files);
     $input = [
+      'file_upload_name'  => $name_of_files,
       'status_approval_finance' => "Accepted",
       'approval_finance_at'  => date('Y-m-d H:i:s'),
       'approval_finance_by'  => $this->session->get('user_data')['username'],
     ];
-
     if($this->purchasing->update($id, $input)) {
       $response = "Approved Success!";
       return redirect()->route('view_purchasing_data')->with('message', $response);
